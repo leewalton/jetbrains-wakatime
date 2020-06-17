@@ -24,6 +24,8 @@ public class Settings extends DialogWrapper {
     private final JLabel proxyLabel;
     private final JTextField proxy;
     private final JLabel debugLabel;
+    private final JCheckBox offline;
+    private final JLabel offlineLabel;
     private final JCheckBox debug;
 
     public Settings(@Nullable Project project) {
@@ -47,11 +49,18 @@ public class Settings extends DialogWrapper {
         proxy.setText(p);
         panel.add(proxy);
 
+        offlineLabel = new JLabel("Offline:", JLabel.CENTER);
+        panel.add(offlineLabel);
+        String o = ConfigFile.get("settings", "offline");
+        offline = new JCheckBox();
+        offline.setSelected(o != null && o.trim().toLowerCase().equals("true"));
+        panel.add(offline);
+
         debugLabel = new JLabel("Debug:", JLabel.CENTER);
         panel.add(debugLabel);
-        String val = ConfigFile.get("settings", "debug");
+        String d = ConfigFile.get("settings", "debug");
         debug = new JCheckBox();
-        debug.setSelected(val != null && val.trim().toLowerCase().equals("true"));
+        debug.setSelected(d != null && d.trim().toLowerCase().equals("true"));
         panel.add(debug);
 
         init();
@@ -77,9 +86,12 @@ public class Settings extends DialogWrapper {
     public void doOKAction() {
         ApiKey.setApiKey(apiKey.getText());
         ConfigFile.set("settings", "proxy", proxy.getText());
-        String val = "false";
-        if (debug.isSelected()) val = "true";
-        ConfigFile.set("settings", "debug", val);
+        String o = "false";
+        if (offline.isSelected()) o = "true";
+        ConfigFile.set("settings", "offline", o);
+        String d = "false";
+        if (debug.isSelected()) d = "true";
+        ConfigFile.set("settings", "debug", d);
         WakaTime.setupDebugging();
         WakaTime.setLoggingLevel();
         super.doOKAction();

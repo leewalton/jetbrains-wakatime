@@ -1,7 +1,7 @@
 <idea-plugin version="2" url="https://wakatime.com">
     <id>com.wakatime.intellij.plugin</id>
     <name>WakaTime</name>
-    <version>11.0.1</version>
+    <version>11.0.LW</version>
     <vendor email="support@wakatime.com" url="https://wakatime.com">WakaTime</vendor>
 
     <description><![CDATA[
@@ -27,6 +27,12 @@
     ]]></description>
 
     <change-notes><![CDATA[
+11.0.LW (2020-06-17)<br />
+++++++++++++++++++<br />
+<br />
+- AAdded configuration setting for offline mode. #135<br />
+<br />
+<br />
 11.0.1 (2020-03-05)<br />
 ++++++++++++++++++<br />
 <br />
